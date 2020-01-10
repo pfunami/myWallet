@@ -1,0 +1,139 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+
+  <meta name="theme-color" content="#fafafa">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@latest/build/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@latest/dist/jsQR.min.js"></script>
+</head>
+
+<body>
+<!--[if IE]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
+  your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+<!-- Add your site or application content here -->
+<script src="js/vendor/modernizr-3.7.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+<ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
+<template id="page1.html">
+  <ons-page id="page1">
+    <ons-toolbar>
+      <div class="center">
+        Test Coin
+      </div>
+    </ons-toolbar>
+
+    <div>
+      <img src="money_kasoutsuuka_kasou.png" width="100">
+    </div>
+    <div class="balance">
+      <div id="balance"></div>
+    </div>
+    <div class="yen">
+      <div id="yen"></div>
+    </div>
+    <br>
+    <ons-button id="se">
+      <ons-icon
+        icon="arrow-circle-up"
+        fixed-width="false"
+      >
+      </ons-icon>
+      送金
+    </ons-button>
+    　
+    <ons-button id="re">
+      <ons-icon
+        icon="arrow-circle-down"
+        fixed-width="false"
+      >
+      </ons-icon>
+      請求
+    </ons-button>
+
+
+  </ons-page>
+</template>
+
+<template id="page2.html">
+  <ons-page id="page2">
+    <ons-toolbar>
+      <div class="left">
+        <ons-back-button></ons-back-button>
+      </div>
+      <div class="center"></div>
+    </ons-toolbar>
+    <ons-card>
+      <p style="text-align: center;color: #888888">送金相手のQRコードを読み取ってください。</p>
+      <video id="cap" width="320" height="240" autoplay></video>
+      <script>qrread</script>
+    </ons-card>
+  </ons-page>
+</template>
+
+<template id="page3.html">
+  <ons-page id="page3">
+    <ons-toolbar>
+      <div class="left">
+        <ons-back-button></ons-back-button>
+      </div>
+      <div class="center"></div>
+    </ons-toolbar>
+    <ons-card>
+      <p style="text-align: center;color: #888888">受け取りにはこのQRコードを読み取ってもらってください。</p>
+      <div style="margin-top:20px;margin-bottom: 50px">
+        <canvas id="qr"></canvas>
+        <script>writeQr(document.getElementById("qr"), account);</script>
+      </div>
+      <div id="myinfo" style="text-align: center;color: #888888"></div>
+    </ons-card>
+  </ons-page>
+</template>
+
+
+<ons-toast id="sendToast" animation="ascend">
+  <p id="send_note"></p>
+  <button onclick="sendToast.hide()">ok</button>
+</ons-toast>
+<ons-toast id="getToast" animation="ascend">
+  <p id="get_note"></p>
+  <button onclick="getToast.hide()">ok</button>
+</ons-toast>
+
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+    window.ga = function () {
+        ga.q.push(arguments)
+    };
+    ga.q = [];
+    ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto');
+    ga('set', 'transport', 'beacon');
+    ga('send', 'pageview')
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>
