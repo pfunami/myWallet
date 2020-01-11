@@ -4,7 +4,7 @@ if (typeof web3 !== 'undefined') {
     web3.version.getNetwork((error, result) => {
         console.log('Network ID: ' + result)
     });
-    var account = "0xc289e22143536db9e0556d87e45dc17cf3f84acd";
+    var account = "0xcaf0f14fcd031808191c42cabc0a1706cd042d84";
 
     web3.eth.getAccounts((error, result) => {
         account = result[0];
