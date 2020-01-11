@@ -18,7 +18,6 @@
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
   <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
   <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@latest/build/qrcode.min.js"></script>
 </head>
 
 <body>
@@ -28,11 +27,11 @@
 <![endif]-->
 
 <!-- Add your site or application content here -->
-<script src="js/vendor/modernizr-3.7.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
 <script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
 <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
 <template id="page1.html">
   <ons-page id="page1">
@@ -82,13 +81,23 @@
       </div>
       <div class="center"></div>
     </ons-toolbar>
-    <ons-card>
+    <ons-card id="contents">
       <p style="text-align: center;color: #888888">送金相手のQRコードを読み取ってください。</p>
 
       <!-- カメラ映像 -->
-      <video id="camera" width="300" height="200" autoplay></video>
+      <div style="text-align: center">
+        <video id="camera" width="600" height="400" autoplay></video>
+      </div>
+
       <!-- 処理用 -->
-      <canvas id="screen" width="300" height="200"></canvas>
+      <div style="text-align: center">
+        <canvas id="picture" width="600" height="400" style="display: none"></canvas>
+      </div>
+      <!-- 読み取り結果 -->
+      <div id="result">
+        <small>※ここに読み取り結果が表示されます※</small>
+      </div>
+      <script src="js/jsQR.js"></script>
       <script src="js/myqr.js"></script>
 
     </ons-card>
@@ -115,6 +124,36 @@
 </template>
 
 
+<template id="page4.html">
+
+  <ons-page id="page4">
+    <ons-toolbar>
+      <div class="left">
+        <ons-back-button></ons-back-button>
+      </div>
+      <div class="center"></div>
+    </ons-toolbar>
+
+    <p style="text-align: center;color: #888888">送金する額を入力してください。</p>
+
+    <h1>
+      <div style="text-align: center; margin-top: 30px;">
+        <p>
+          <ons-input type="number" id="username" modifier="underbar" placeholder="0" float></ons-input>
+          TEC
+        </p>
+
+        <div id="balanceOne"></div>
+        <script>checkBalance2();</script>
+        <p style="margin-top: 30px;">
+          <ons-button onclick="login()">Sign in</ons-button>
+        </p>
+      </div>
+    </h1>
+
+  </ons-page>
+</template>
+
 <ons-toast id="sendToast" animation="ascend">
   <p id="send_note"></p>
   <button onclick="sendToast.hide()">ok</button>
@@ -140,7 +179,6 @@
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.1.1/dist/jsQR.min.js"
         integrity="sha384-i4Tuh5Z0ns/3M0289mSougur8irvedWPBlwOcJ7ob5AK/rvN5tjkwzu7P1k1dThG"
         crossorigin="anonymous"></script>
-<script src="js/main.js"></script>
 </body>
 
 </html>

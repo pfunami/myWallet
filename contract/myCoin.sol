@@ -7,6 +7,9 @@ contract myCoin {
   uint8 public decimals;      /*小数点以下の桁数*/
   uint256 public totalSupply; /*tokenの総量*/
   mapping(address => uint256) public balanceOf; /*各アドレスの残高*/
+  mapping(uint256 => string) public date;
+  uint256 public transferId;
+
 
   /*イベント通知*/
   event Transfer(address indexed from, address indexed to, uint256 value);
@@ -18,10 +21,11 @@ contract myCoin {
     symbol = _symbol;
     decimals = _decimals;
     totalSupply = _supply;
+    transferId = 0;
   }
 
   /*送金*/
-  function transfer(address _to, uint256 _value) public {
+  function transfer(address _to, uint256 _value, string memory _date) public {
     /*不正送金チェック*/
     if (balanceOf[msg.sender] < _value) revert();
     if (balanceOf[_to] + _value < balanceOf[_to]) revert();
@@ -30,7 +34,17 @@ contract myCoin {
     balanceOf[msg.sender] -= _value;
     balanceOf[_to] += _value;
 
+    transferId = transferId + 1;
+    date[transferId] = _date;
     /*イベント通知*/
     emit Transfer(msg.sender, _to, _value);
+  }
+
+  function getLog() public {
+    return date;
+  }
+
+  function getLogNum() public {
+    return transferId;
   }
 }
